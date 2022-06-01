@@ -1,16 +1,15 @@
 <template>
 <!-- <div class="container"> -->
-<div>
+<div >
 <h2 class="text-center" style="margin-top:-10px; margin-left:250px; padding-bottom: 20px;">Tasks To Do</h2>
  <div>
   
-  <b-tabs content-class="">
-    <b-tab title="High Priority" active>
-      
-        <div class="row-container">
+  <b-tabs content-class="" >
 
+    <b-tab title="High Priority" active>
+        <div class="row-container">
        <div class="com" v-for="hight in high"
-      :key="hight.color">
+      :key="hight.id">
             
        <div :class="'product-inner ' + hight.color ">
          <div class="product-text-wrap">
@@ -26,10 +25,11 @@
        </div>
        </div>
 </div>
-  </b-tab>
+  </b-tab >
     <b-tab title="Mid Priority">
-      <div class="product container" v-for="midp in products"
-      :key="midp.color">
+          <div class="row-container">
+      <div class="com" v-for="midp in products"
+      :key="midp.id">
             
        <div :class="'product-inner ' + midp.color ">
          <div class="product-text-wrap">
@@ -44,10 +44,14 @@
          </div>
        </div>
        </div>
+       </div>
     </b-tab>
+
+
     <b-tab title="Low priority">
-      <div class="product container" v-for="lowp in low"
-      :key="lowp.color">
+      <div class="row-container">
+      <div class="com" v-for="lowp in low"
+      :key="lowp.id">
             
        <div :class="'product-inner ' + lowp.color ">
          <div class="product-text-wrap">
@@ -60,6 +64,7 @@
            <h2>{{lowp.title}}</h2>
            <p>{{lowp.detail}}</p>
          </div>
+         </div>
        </div>
        </div>
     </b-tab>
@@ -67,17 +72,17 @@
   </b-tabs>
  
 </div>
-
-  
-</div>
-
-
-
-    
+ 
+</div>    
 </template>
 <script>
 
+
+
 export default{
+  name: 'ProductPage',
+
+
  
   props: {
   
@@ -92,10 +97,7 @@ export default{
    low:{
     type: Array,
     default: null,
-  }
-  
-  
-  
+  } 
   }
 
 }
@@ -104,12 +106,25 @@ export default{
 <style>
 .row-container{
   display: flex;
-flex-direction: column;
-  flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+
+
 }
 .com{
-
-  padding: 30px;
+ display: flex;
+       /* width: 356px; */
+      min-height: 132px;
+      /* background: #e6f7f0; */
+      border-radius: 12px;
+      align-items: center;
+      justify-content: center;
+      padding: 25px 15px;
+      /* padding: 0 0 0 20px; */
+      flex-basis: calc(50.333% - 40px/3);
+ 
 }
 .product-inner{
   position: relative;
@@ -166,6 +181,7 @@ flex-direction: column;
     background-color: #FFF;
     padding: 25px;
     margin: 0px -25px -25px;
+    
   }
   .product-detail h2 {
     font-size: 24px;

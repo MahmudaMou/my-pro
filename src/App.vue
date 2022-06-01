@@ -13,7 +13,7 @@
   <div class="col-md-4">
            <TodoApp/>
            </div> 
-           </div>
+    </div>
   </div>
 </div>
  
@@ -48,15 +48,13 @@ export default {
 
   
   created(){
-              
         axios.get(`/items`)
        .then(res => {
-        
-                   this.products = res.data.data.mid;
+                  
+                    this.products = res.data.data.mid;
                     this.high = res.data.data.high;
                     this.low = res.data.data.low;
-                    console.log(res);
-                   })
+       })
        .catch(error => console.log(error))
   }
       
@@ -90,6 +88,7 @@ export default {
      padding-top: 50px;
      padding-left: 50px;
      margin-left: -50px;
+     margin-right: 150px;
     
 
      
