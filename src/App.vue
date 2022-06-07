@@ -7,7 +7,7 @@
    <div class="row">
       
       <div class="col-md-6 product">
-  <ProductPage :products = "products" :high = "high" :low = "low"/> 
+  <ProductPage :mid = "mid" :high = "high" :low = "low"/> 
   </div>
   
   <div class="col-md-4">
@@ -39,7 +39,7 @@ export default {
 },
   data(){
     return {
-      products:[],
+      mid:[],
       high:[],
       low:[],
       info: []
@@ -51,7 +51,7 @@ export default {
         axios.get(`/items`)
        .then(res => {
                   
-                    this.products = res.data.data.mid;
+                    this.mid = res.data.data.mid;
                     this.high = res.data.data.high;
                     this.low = res.data.data.low;
        })

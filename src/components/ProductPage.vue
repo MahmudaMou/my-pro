@@ -1,76 +1,43 @@
 <template>
-<!-- <div class="container"> -->
 <div >
 <h2 class="text-center" style="margin-top:-10px; margin-left:250px; padding-bottom: 20px;">Tasks To Do</h2>
  <div>
-  
-  <b-tabs content-class="" >
-
-    <b-tab title="High Priority" active>
-        <div class="row-container">
-       <div class="com" v-for="hight in high"
-      :key="hight.id">
-            
-       <div :class="'product-inner ' + hight.color ">
-         <div class="product-text-wrap">
-           <h2 class="bg-text">{{hight.bgtext}}</h2>
-         </div>
-         <div class="product-image-wrap">
-           <img :src="hight.image" class="image" style="height:140px;width:170px;">
-         </div>
-         <div class="product-detail">
-           <h2>{{hight.title}}</h2>
-           <p>{{hight.detail}}</p>
-         </div>
-       </div>
-       </div>
-</div>
-  </b-tab >
-    <b-tab title="Mid Priority">
-          <div class="row-container">
-      <div class="com" v-for="midp in products"
-      :key="midp.id">
-            
-       <div :class="'product-inner ' + midp.color ">
-         <div class="product-text-wrap">
-           <h2 class="bg-text">{{midp.bgtext}}</h2>
-         </div>
-         <div class="product-image-wrap">
-           <img :src="midp.image" class="image">
-         </div>
-         <div class="product-detail">
-           <h2>{{midp.title}}</h2>
-           <p>{{midp.detail}}</p>
-         </div>
-       </div>
-       </div>
-       </div>
-    </b-tab>
-
-
-    <b-tab title="Low priority">
-      <div class="row-container">
-      <div class="com" v-for="lowp in low"
-      :key="lowp.id">
-            
-       <div :class="'product-inner ' + lowp.color ">
-         <div class="product-text-wrap">
-           <h2 class="bg-text">{{lowp.bgtext}}</h2>
-         </div>
-         <div class="product-image-wrap">
-           <img :src="lowp.image" class="image" style="height:140px;width:170px;">
-         </div>
-         <div class="product-detail">
-           <h2>{{lowp.title}}</h2>
-           <p>{{lowp.detail}}</p>
-         </div>
-         </div>
-       </div>
-       </div>
-    </b-tab>
+   <div>
     
-  </b-tabs>
- 
+     
+  <ul class="nav nav-tabs" pills >
+     <TabNav v-for="tab in tabs" :key="tab" class="nav-item">
+  <a class="nav-link" :class="{ active: tab === selected }" @click="setTab(tab)"
+    >{{ tab }}</a>
+</TabNav> 
+  </ul>
+
+
+  
+        <tab v-on="selectContent()">
+       <div class="row-container">
+       <div class="com" v-for= "data in content"
+      :key="data .id">
+            
+       <div :class="'product-inner ' + data .color ">
+         <div class="product-text-wrap">
+           <h2 class="bg-text">{{data .bgtext}}</h2>
+         </div>
+         <div class="product-image-wrap">
+           <img :src="data .image" class="image" style="height:140px;width:170px;">
+         </div>
+         <div class="product-detail">
+           <h2>{{data.title}}</h2>
+           <p>{{data.detail}}</p>
+         </div>
+       </div>
+       
+       </div>   
+</div>
+</tab>
+
+</div>
+
 </div>
  
 </div>    
@@ -81,12 +48,9 @@
 
 export default{
   name: 'ProductPage',
-
-
- 
   props: {
   
-  products:{
+  mid:{
     type: Array,
     default: null,
   },
@@ -98,9 +62,38 @@ export default{
     type: Array,
     default: null,
   } 
-  }
+  },
+  data(){
+    return{
+      selected: 'high priority',
+      tabs: ['high priority','mid priority','low priority'],
+      content:[],
+    };
 
-}
+  },
+  methods:{
+         selectContent(){
+         if(this.selected === this.tabs[0]){
+         this.content = this.high;
+         }
+         else if(this.selected === this.tabs[1]){
+             this.content = this.mid;
+        }
+         else if(this.selected === this.tabs[2]){
+         this.content = this.low;
+        }
+      },
+    
+      setTab(tab){
+
+        this.selected = tab;
+      },
+      
+  }
+  }
+  
+
+
 </script>
 
 <style>
@@ -112,6 +105,11 @@ export default{
     gap: 20px;
 
 
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  background-image: linear-gradient(45deg, #1cd164, #e7c623);
+  border-color: #1b5794;
+  color: #fcfafa;
 }
 .com{
  display: flex;

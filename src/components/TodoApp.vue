@@ -3,7 +3,7 @@
      <h2 class="text-center mt-5">List</h2>
       <!--Input-->
       <div class="d-flex">
-        <input v-model="task" type="text" placeholder="Enter text"  class="form-control" >
+        <input v-model="task " type="text" placeholder="Enter text"  class="form-control" >
         <button @click="submitTask" class="btn btn-warning rounded-0">submit</button>
       </div>
 
